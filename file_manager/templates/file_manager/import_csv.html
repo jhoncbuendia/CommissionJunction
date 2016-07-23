@@ -1,0 +1,26 @@
+<div class="row">
+
+	<div class="col-md-7">
+		
+		<div class="list-group">
+		  <a  class="list-group-item active">
+		   <h2>Repositorios</h2>
+		  </a>
+		  
+		  <a  class="list-group-item" ><h3>boohoo_com-Product_Feed.txt.gz  <button id="importar" type="button" class="btn btn-success" ng-click="import_repo('boohoo_com-Product_Feed.txt.gz')"><h4>Importar</h4></button></h3></a>
+		  <a  class="list-group-item" ><h3>Heels-Product_Catalog.txt.gz <button id="importar" type="button" class="btn btn-success" ng-click="import_repo('Heels-Product_Catalog.txt.gz')"><h4>Importar</h4></button></h3></a>
+		  <a  class="list-group-item" ><h3>Free_People-Product_Catalog.txt.gz <button id="importar" type="button" class="btn btn-success" ng-click="import_repo('Free_People-Product_Catalog.txt.gz')"><h4>Importar</h4></button></h3></a>
+		  <a  class="list-group-item" ><h3>Zappos_com-Style_Level_Feed.txt.gz <button id="importar" type="button" class="btn btn-success" ng-click="import_repo('Zappos_com-Style_Level_Feed.txt.gz')"><h4>Importar</h4></button></h3></a>
+		  <a  class="list-group-item" ><h3>Nine_West-Nine_West_Product_Catalog.txt.gz <button id="importar" type="button" class="btn btn-success" ng-click="import_repo('Nine_West-Nine_West_Product_Catalog.txt.gz')"><h4>Importar</h4></button></h3></a>
+		  <a  class="list-group-item" ><h3>Shopsense.txt.gz <button id="importar" type="button" class="btn btn-success" ng-click="import_repo('Shopsense.txt.gz')"><h4>Importar</h4></button></h3></a>
+		  <a  class="list-group-item" ><h3>boohoo_com-Product_Feed.txt.gz<button id="importar" type="button" class="btn btn-success" ng-click="import_repo('boohoo_com-Product_Feed.txt.gz')"><h4>Importar</h4></button></h3></a>
+		  <a  class="list-group-item" ><h3>Personalizado</h3><input type="text" placeholder="Nombre del archivo" ng-model="nombre" size="45">
+		<button type="button" class="btn btn-success" ng-click="descargar_csv()"><h4>Importar</h4></button></a>
+		</div>
+		
+		
+	</div>
+	<div class="col-md-5">
+		<div class="alert alert-info" role="alert"><h1 ng-bind="estado">Estado</h1></div>
+	</div>
+</div>

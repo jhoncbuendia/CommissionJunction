@@ -1,0 +1,127 @@
+catalog table schema
+
+-- Table: catalog
+
+-- DROP TABLE catalog;
+
+CREATE TABLE catalog
+(
+  programname text,
+  programurl text,
+  catalogname text,
+  lastupdate text,
+  name text,
+  keywords text,
+  description text,
+  sku text,
+  manufacturer text,
+  manufacturerid text,
+  upc text,
+  isbn text,
+  currency text,
+  saleprice text,
+  price text,
+  retailprice text,
+  fromprice text,
+  buyurl text,
+  impressionurl text,
+  imageurl text,
+  advertinsercategory text,
+  thirdpartyid text,
+  thirdpartycategory text,
+  author text,
+  artist text,
+  title text,
+  publisher text,
+  label text,
+  format text,
+  special text,
+  gift text,
+  promotionaltext text,
+  startdate text,
+  enddate text,
+  offline text,
+  online text,
+  instock text,
+  condition text,
+  warranty text,
+  standardshippingcost text
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE catalog
+  OWNER TO postgres;
+
+  
+
+store procedures
+
+
+-- Function: get_catalog_json()
+
+-- DROP FUNCTION get_catalog_json();
+
+CREATE OR REPLACE FUNCTION get_catalog_json()
+  RETURNS text AS
+$BODY$
+BEGIN
+RETURN (select array_to_json(array_agg(row_to_json(t)))
+from (
+select * from catalog limit 100
+) t);
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION get_catalog_json()
+  OWNER TO postgres;
+
+
+
+ -- Function: import_csv()
+
+-- DROP FUNCTION import_csv();
+
+CREATE OR REPLACE FUNCTION import_csv()
+  RETURNS void AS
+$BODY$
+BEGIN
+COPY catalog(programname, programurl, catalogname, lastupdate, name, keywords, description, sku, manufacturer,
+manufacturerid, upc, isbn, currency, saleprice, price, retailprice, fromprice, buyurl, impressionurl, imageurl,
+advertinsercategory, thirdpartyid, thirdpartycategory, author, artist, title, publisher, label, format, special,
+gift, promotionaltext, startdate, enddate, offline, online, instock, condition, warranty, standardshippingcost)
+FROM '/home/jhon/files/uncompressed.txt'
+WITH DELIMITER ','
+CSV HEADER;
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION import_csv()
+  OWNER TO postgres;
+
+
+-- Function: search_product(text, text, text, text, text)
+
+-- DROP FUNCTION search_product(text, text, text, text, text);
+
+CREATE OR REPLACE FUNCTION search_product(p1 text, p2 text, p3 text, p4 text, p5 text)
+  RETURNS text AS
+$BODY$
+begin 
+RETURN (select array_to_json(array_agg(row_to_json(t)))
+from (
+select * from catalog as c where (c.keywords ilike '%'||p1||'%' and c.keywords ilike '%'||p2||'%'
+and c.keywords ilike '%'||p3||'%' and c.keywords ilike '%'||p4||'%' and c.keywords ilike '%'||p5||'%')
+) t);
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION search_product(text, text, text, text, text)
+  OWNER TO postgres;
+
+
+
+

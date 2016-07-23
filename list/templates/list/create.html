@@ -1,0 +1,104 @@
+<style type="text/css">
+	.description{
+		list-style: none;
+		text-decoration: none !important;
+	}
+
+    .loading{
+        display: none;
+    }
+
+    .glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+</style>
+
+
+    
+
+<div class="row">
+<div class="col-sm-12">
+	<form class="form-inline">
+	  
+	  <div class="form-group">
+	    <label for="exampleInputEmail2">Texto a buscar</label>
+	    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Texto a buscar" ng-model="texto">
+	  </div>
+	  <button type="submit" class="btn btn-success" ng-click="search()">Buscar</button>
+      <div class="form-group">
+        <button class="btn btn-lg btn-warning loading"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Cargando...</button>
+      </div>
+	</form>
+</div>
+
+</div>
+<hr>
+<div class="row">
+	<h1>Preview</h1>
+    <div class="col-lg-3 col-sm-4 col-xs-6" ng-repeat="p in products_preview track by $index">
+        <a  class="thumbnail">
+             <img src="[[p.imageurl]]" class="img-responsive">
+             <ul class="description">
+             	<li>Name: [[p.name]]</li>
+             	<li>Catalog: [[p.catalogname]]</li>
+             	<li>Stock: [[p.instock]]</li>
+             	<li>Keywords: [[p.keywords]]</li>
+             	<li>Manufacturer: [[p.manufacturer]]</li>
+             	<li>Manufacturer id: [[p.manufacturerid]]</li>
+             	<li>Price: [[p.price]]</li>
+             	<li>Retail price: [[p.retailprice]]</li>
+             	<li>Sale Price: [[p.saleprice]]</li>
+             	<li>Sku: [[p.sku]]</li>
+             	
+             </ul>
+        </a>
+    </div>
+    <form class="form-inline">
+      <div class="form-group">
+        <label for="exampleInputName2" >Nombre de la lista</label>
+        <input type="text" class="form-control"  placeholder="Nombre de la lista" ng-model="list_name" id="list-name" disabled>
+      </div>
+      <div class="form-group">
+        <button  class="btn btn-info" id="btn-grabar" ng-click="save_list()" disabled>Grabar lista</button >
+      </div>
+     
+    </form>
+    
+</div>
+<hr>
+
+
+<div class="row">
+<h1>Resultado de la busqueda</h1>
+    <div class="col-lg-3 col-sm-4 col-xs-6" ng-repeat="p in products">
+        <a  class="thumbnail">
+             <img src="[[p.imageurl]]" class="img-responsive">
+             <ul class="description">
+             	<li>Name: [[p.name]]</li>
+             	<li>Catalog: [[p.catalogname]]</li>
+             	<li>Stock: [[p.instock]]</li>
+             	<li>Keywords: [[p.keywords]]</li>
+             	<li>Manufacturer: [[p.manufacturer]]</li>
+             	<li>Manufacturer id: [[p.manufacturerid]]</li>
+             	<li>Price: [[p.price]]</li>
+             	<li>Retail price: [[p.retailprice]]</li>
+             	<li>Sale Price: [[p.saleprice]]</li>
+             	<li>Sku: [[p.sku]]</li>
+             	<li><button type="submit" class="btn btn-success" ng-click="include_product(p)">Incluir</button></li>
+             </ul>
+        </a>
+    </div>
+     
+  </div>
+<hr>

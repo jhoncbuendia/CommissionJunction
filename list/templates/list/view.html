@@ -1,0 +1,134 @@
+<style type="text/css">
+	.description{
+		list-style: none;
+		text-decoration: none !important;
+	}
+
+	.loading{
+		display: none;
+	}
+
+	.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+</style>
+
+
+<div class="row">
+<h1>Listas Disponibles</h1>
+<div class="col-sm-12">
+<table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Fecha</th>
+
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="l in lists ">
+          <th scope="row">[[ $index ]]</th>
+          <th>[[l.name]]</th>
+          <th>[[l.created]]</th>
+          <th><button class="btn btn-info" ng-click="products_list([[ $index ]])">Ver</button></th>
+         
+          <th><button type="button" class="btn btn-danger" ng-click="delete_list(l.pk)">Eliminar</button></th>
+          <th><a target="_blank" href="/list/service/[[l.pk]]/">Rest Service URl</a></th>
+        </tr>
+        
+      </tbody>
+    </table>
+</div>
+</div>  
+
+
+
+
+<hr>
+
+<div id="action_container">
+<div class="row">
+<h1>Productos de la lista [[current_list_name]]</h1>
+    <div class="col-lg-3 col-sm-4 col-xs-6" ng-repeat="p in products_list_aux track by $index">
+        <a  class="thumbnail">
+             <img src="[[p.imageurl]]" class="img-responsive">
+             <ul class="description">
+             	<li>Name: [[p.name]]</li>
+             	<li>Catalog: [[p.catalogname]]</li>
+             	<li>Stock: [[p.instock]]</li>
+             	<li>Keywords: [[p.keywords]]</li>
+             	<li>Manufacturer: [[p.manufacturer]]</li>
+             	<li>Manufacturer id: [[p.manufacturerid]]</li>
+             	<li>Price: [[p.price]]</li>
+             	<li>Retail price: [[p.retailprice]]</li>
+             	<li>Sale Price: [[p.saleprice]]</li>
+             	<li>Sku: [[p.sku]]</li>
+             	<button type="button" class="btn btn-danger" ng-click="delete_product(p.sku)">Eliminar</button>
+             </ul>
+        </a>
+    </div>
+    <button  class="btn btn-info" id="btn-grabar" ng-click="save_edited_list()" disabled>Grabar lista</button >
+     
+  </div>
+
+
+<div>
+  <hr>    
+
+<div class="row">
+<h1>Agregar Productos</h1>
+<div class="col-sm-12">
+	<form class="form-inline">
+	  
+	  <div class="form-group">
+	    <label for="exampleInputEmail2">Texto a buscar</label>
+	    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Texto a buscar" ng-model="texto">
+	  </div>
+	  <button type="submit" class="btn btn-success" ng-click="search()">Buscar</button>
+	  <div class="form-group">
+	  	<button class="btn btn-lg btn-warning loading"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Cargando...</button>
+	  </div>
+
+
+	</form>
+</div>
+
+</div>
+<div class="row">
+<h1>Resultado de la busqueda</h1>
+    <div class="col-lg-3 col-sm-4 col-xs-6" ng-repeat="p in products">
+        <a  class="thumbnail">
+             <img src="[[p.imageurl]]" class="img-responsive">
+             <ul class="description">
+             	<li>Name: [[p.name]]</li>
+             	<li>Catalog: [[p.catalogname]]</li>
+             	<li>Stock: [[p.instock]]</li>
+             	<li>Keywords: [[p.keywords]]</li>
+             	<li>Manufacturer: [[p.manufacturer]]</li>
+             	<li>Manufacturer id: [[p.manufacturerid]]</li>
+             	<li>Price: [[p.price]]</li>
+             	<li>Retail price: [[p.retailprice]]</li>
+             	<li>Sale Price: [[p.saleprice]]</li>
+             	<li>Sku: [[p.sku]]</li>
+             	<li><button type="submit" class="btn btn-success" ng-click="add_product(p)">Agregar</button></li>
+             </ul>
+        </a>
+    </div>
+
+     
+  </div>
+</div>
+</div>
